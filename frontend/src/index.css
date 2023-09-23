@@ -4,7 +4,7 @@
 
 @layer components {
   .form-styles {
-    @apply shadow-2xl rounded-3xl bg-slate-100 w-[22rem] h-[26rem] flex flex-col m-auto mt-10 p-10 items-center gap-10;
+    @apply shadow-2xl rounded-3xl bg-slate-100 w-[22rem] h-[26rem] flex flex-col m-auto p-10 items-center gap-10 ;
   }
   .input-styles {
     @apply flex flex-col gap-3 w-11/12

@@ -10,9 +10,9 @@
     @apply flex flex-col gap-3 w-11/12
   }
   .btn-signup-styles {
-    @apply bg-green-400 w-28 h-9 rounded-xl
+    @apply bg-green-400 w-28 h-9 rounded-xl hover:-translate-y-1 transition-transform hover:scale-110
   }
   .btn-login-styles {
-    @apply bg-blue-400 w-28 h-9 rounded-xl
+    @apply bg-blue-400 w-28 h-9 rounded-xl hover:-translate-y-1 transition-transform hover:scale-110
   }
 }

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import RequestSerializer, CreateRequestSerializer
+from .serializers import RequestSerializer, CreateRequestSerializer, UpdateRequestSerializer
 from .models import Requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -22,9 +22,8 @@ class GetAll(APIView):
 
     def get(self, request, format=None):
         queryset = Requests.objects.all()
-        req_list = [{'username': req.username, 'start_address': req.start_address, 'end_address': req.end_address, 'accepted': req.accepted} for req in queryset]
-        data = json.dumps(req_list)
-        return Response({'req_list': data}, status=status.HTTP_200_OK)
+        req_list = [{'id' : req.id, 'username': req.username, 'start_address': req.start_address, 'end_address': req.end_address, 'accepted': req.accepted} for req in queryset]
+        return Response({'req_list': req_list}, status=status.HTTP_200_OK)
 
 
 class GetRequest(APIView):
@@ -44,8 +43,8 @@ class GetRequest(APIView):
 
 class CreateRequestView(APIView):
     serializer_class = CreateRequestSerializer
-    r = None;
     def post(self, request, format=None):
+        req = None;
         
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -53,9 +52,31 @@ class CreateRequestView(APIView):
             start_address = serializer.data.get('start_address')
             end_address = serializer.data.get('end_address')
             accepted = serializer.data.get('accepted')
-
-            r = Requests(username = username, start_address=start_address, end_address=end_address, accepted=accepted)
-            r.save()
+            queryset = Requests.objects.filter(username=username)
+            if queryset.exists():
+                r = queryset.first()  # Use first() instead of [0] for clarity
+                r.accepted = accepted
+                r.save(update_fields=['accepted'])
+            else:
+                req = Requests(username = username, start_address=start_address, end_address=end_address, accepted=accepted)
+                req.save()
         else:
             Response({'error': 'Not valid'}, status=status.HTTP_502_BAD_GATEWAY)
-        return Response(RequestSerializer(r).data, status=status.HTTP_200_OK)
+        return Response(RequestSerializer(req).data, status=status.HTTP_200_OK)
+    
+class ChangeAcceptedView(APIView):
+    serializer_class = UpdateRequestSerializer
+
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        
+        if serializer.is_valid():
+            id = serializer.validated_data.get('id')
+            queryset = Requests.objects.filter(id=id)
+            if queryset.exists():
+                r=queryset[0]
+                r.accepted = True
+                r.save(update_fields=['accepted'])
+                return Response(RequestSerializer(r).data, status=status.HTTP_200_OK)
+        
+        return Response({'detail': 'Invalid data.'}, status=status.HTTP_400_BAD_REQUEST)

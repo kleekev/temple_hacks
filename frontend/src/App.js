@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Pages
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
-import Login from './pages/Login';
 import CreateCarPoolRequest from './pages/CreateCarPoolRequest';
 import CreateRequest from './pages/CreateRequest';
 
@@ -24,10 +23,6 @@ function App() {
               <Route
                 path='/signup'
                 element={<SignUp/>}
-              />
-              <Route
-                path='/login'
-                element={<Login/>}
               />
               <Route
                 path='/carpool/create'

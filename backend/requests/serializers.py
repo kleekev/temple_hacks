@@ -11,3 +11,8 @@ class CreateRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requests
         fields = ('username', 'start_address', 'end_address', 'accepted')
+
+class UpdateRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Requests
+        fields = ('id', 'accepted')

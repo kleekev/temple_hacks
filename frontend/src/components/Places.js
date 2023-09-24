@@ -6,7 +6,6 @@ import { Combobox } from '@headlessui/react'
 
 const Places = (props) => {
     const { ready, value, setValue, suggestions: {status, data}, clearSuggestions } = usePlacesAutocomplete();
-    console.log({status, data});
     
     const handleSelect = async (val) => {
         setValue(val, false)
@@ -15,6 +14,7 @@ const Places = (props) => {
         const results = await getGeocode({ address: val })
         const {lat, lng} = await getLatLng(results[0])
         props.setPosition({ lat, lng })
+        props.setEndAddress(results[0].formatted_address)
     }
 
     return (

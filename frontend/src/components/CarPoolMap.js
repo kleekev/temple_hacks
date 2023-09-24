@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef, useEffect } from 'react'
+import { useState, useMemo, useCallback, useRef } from 'react'
 import {
   GoogleMap,
   Marker,
@@ -42,8 +42,6 @@ const CarPoolMap = () => {
     if (directions.length > 5) {
       return
     }
-
-    console.log({origin, request});
 
     const service = new google.maps.DirectionsService();
     service.route(
@@ -91,15 +89,15 @@ const CarPoolMap = () => {
               {originDirections && <DirectionsRenderer directions={originDirections}/>}
               {directions.length !== 0 && directions.map((direction) => <DirectionsRenderer directions={direction} />)}
 
-              {requests.map(request => <Marker key={request.lat} position={request} onClick={() => {
+              {requests.filter((req) => Math.abs(req.lat - dst.lat) < 0.02555 && Math.abs(req.lng - dst.lng) < 0.02555).map(request => <Marker key={request.lat} position={request} onClick={() => {
                 if (!hitDst) {
                   fetchDirections(origin,request)
                   setOrigin(request)
                 }
               }}/>)}
-              <Circle center={dst} radius={1500} options={closeOptions}/>
-              <Circle center={dst} radius={2500} options={middleOptions}/>
-              <Circle center={dst} radius={3500} options={farOptions}/>
+              <Circle center={dst} radius={500} options={closeOptions}/>
+              <Circle center={dst} radius={1500} options={middleOptions}/>
+              <Circle center={dst} radius={2000} options={farOptions}/>
             </>
             )}
         </GoogleMap>
@@ -111,7 +109,7 @@ const CarPoolMap = () => {
 const generateRequest = (position) => {
   const requests = []
   for (let i = 0; i < 10; i++) {
-    const direction = Math.random() < 0.5 ? -3000 : 3000
+    const direction = Math.random() < 0.5 ? -1500 : 1500
     requests.push({
       lat: position.lat - position.lat * Math.random() / direction,
       lng: position.lng + position.lng * Math.random() / direction,

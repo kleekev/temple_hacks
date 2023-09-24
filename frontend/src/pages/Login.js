@@ -24,7 +24,6 @@ const Login = () => {
                     value={password}
                 />
             </div>
-            
             <button className='btn-login-styles'>Login</button>
             </form>
         </div>

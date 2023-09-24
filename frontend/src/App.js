@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import CreateCarPoolRequest from './pages/CreateCarPoolRequest';
 
 // Components
 import Navbar from './components/Navbar';
@@ -27,9 +28,12 @@ function App() {
                 path='/login'
                 element={<Login/>}
               />
+              <Route
+                path='/carpool/request'
+                element={<CreateCarPoolRequest/>}
+              />
           </Routes>
         </div>
-          
       </BrowserRouter>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -24,7 +24,7 @@ const Login = () => {
                 />
             </div>
             
-            <button className='btn-login-styles'>Login</button>
+            <button onClick={loginBtn} className='btn-login-styles'>Login</button>
         </form>
     )
 }

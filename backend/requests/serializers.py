@@ -4,10 +4,10 @@ from .models import Requests
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requests
-        fields = ('id', 'username', 'start_address', 'end_address')
+        fields = ('id', 'username', 'start_address', 'end_address', 'accepted')
 
 
 class CreateRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requests
-        fields = ('username', 'start_address', 'end_address')
+        fields = ('username', 'start_address', 'end_address', 'accepted')

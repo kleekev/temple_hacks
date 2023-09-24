@@ -6,3 +6,4 @@ class Requests(models.Model):
     username = models.CharField(max_length=250, unique=True)
     start_address = models.CharField(max_length=1000)
     end_address = models.CharField(max_length=1000)
+    accepted=models.BooleanField(default=False, null=True)

@@ -12,16 +12,17 @@ class RequestView(generics.CreateAPIView):
     serializer_class = RequestSerializer
 
 class deleteAll(APIView):
-    Requests.objects.all().delete()
-    def get(self, request, format=None):
-        return Response({'success': 'Deleted All Data'}, status=status.HTTP_200_OK)
+    def delete(self, request, format=None):
+        # Delete all records from the Requests model
+        Requests.objects.all().delete()
+        return Response({'success': 'Deleted All Data'}, status=status.HTTP_204_NO_CONTENT)
 
 class GetAll(APIView):
     serializer_class = RequestSerializer
 
     def get(self, request, format=None):
         queryset = Requests.objects.all()
-        req_list = [{'username': req.username, 'start_address': req.start_address, 'end_address': req.end_address} for req in queryset]
+        req_list = [{'username': req.username, 'start_address': req.start_address, 'end_address': req.end_address, 'accepted': req.accepted} for req in queryset]
         data = json.dumps(req_list)
         return Response({'req_list': data}, status=status.HTTP_200_OK)
 
@@ -41,9 +42,9 @@ class GetRequest(APIView):
             return Response({'error': 'Invalid username'}, status=status.HTTP_502_BAD_GATEWAY)
         return Response({'error': 'username not found in request'}, status=status.HTTP_502_BAD_GATEWAY)
 
-class CreateRoomView(APIView):
+class CreateRequestView(APIView):
     serializer_class = CreateRequestSerializer
-
+    r = None;
     def post(self, request, format=None):
         
         serializer = self.serializer_class(data=request.data)
@@ -51,8 +52,9 @@ class CreateRoomView(APIView):
             username = serializer.data.get('username')
             start_address = serializer.data.get('start_address')
             end_address = serializer.data.get('end_address')
+            accepted = serializer.data.get('accepted')
 
-            r = Requests(username = username, start_address=start_address, end_address=end_address)
+            r = Requests(username = username, start_address=start_address, end_address=end_address, accepted=accepted)
             r.save()
         else:
             Response({'error': 'Not valid'}, status=status.HTTP_502_BAD_GATEWAY)

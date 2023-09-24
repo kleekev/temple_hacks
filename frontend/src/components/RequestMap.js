@@ -44,11 +44,6 @@ const RequestMap = () => {
       }
     )
   }
-
-  const handleClick = () => {
-    
-  }
-
   useEffect(() => {
     if (dst) {
         fetchDirections()
@@ -62,7 +57,6 @@ const RequestMap = () => {
         <Origin setOrigin={setOrigin}/>
         <Places setPosition={setPostion}/>
         {!dst && <p>Enter your destination</p>}
-        {dst && <button onClick={handleClick}>Submit Request</button>}
       </div>
       <div className='w-[80%] h-full'>
         <GoogleMap

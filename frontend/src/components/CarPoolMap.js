@@ -65,7 +65,7 @@ const CarPoolMap = () => {
   return (
     <div className='flex h-full'>
       <div className='w-[20%] p-4 bg-gray-800 text-blue-500'>
-        <h1 className='text-[2rem] text-center'>Request</h1>
+        <h1 className='text-[2rem] text-center'>Create a Pool!</h1>
         <Origin setOrigin={setOrigin}/>
         <Places setPosition={setPostion}/>
         {!dst && <p>Enter your destination</p>}

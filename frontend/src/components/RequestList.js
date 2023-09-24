@@ -4,7 +4,7 @@ const RequestList = (props) => {
         props.setList(filteredList)
     }
     return (
-        <div>
+        <div className="text-center">
             <h1 className="text-white text-xl underline">List of Accepted Requests</h1>
             {props.list.map((l, index) => (<button onClick={handleClick} key={l}>{l}</button>))}
         </div>

@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import CreateCarPoolRequest from './pages/CreateCarPoolRequest';
+import CreateRequest from './pages/CreateRequest';
 
 // Components
 import Navbar from './components/Navbar';
@@ -29,8 +30,12 @@ function App() {
                 element={<Login/>}
               />
               <Route
-                path='/carpool/request'
+                path='/carpool/create'
                 element={<CreateCarPoolRequest/>}
+              />
+              <Route
+                path='/carpool/request'
+                element={<CreateRequest/>}
               />
           </Routes>
         </div>

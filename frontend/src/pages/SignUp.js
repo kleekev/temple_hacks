@@ -5,7 +5,8 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
 
     return (
-        <form className='form-styles'>
+        <div className='flex items-center justify-center w-full h-full'>
+            <form className='form-styles'>
             <h1 className='text-2xl font-bold'>
                 Sign Up
             </h1>
@@ -25,7 +26,8 @@ const SignUp = () => {
             </div>
             
             <button className='btn-signup-styles'>Sign Up</button>
-        </form>
+            </form>
+        </div>
     )
 }
 

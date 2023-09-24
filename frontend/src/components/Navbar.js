@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     return (
-        <header className="w-screen bg-slate-600 h-[3.5rem] flex justify-between items-center px-5">
+        <header className="w-screen bg-slate-600 min-h-[10%] flex justify-between items-center px-5">
             <NavbarLink href='/' title='Home'/>
             <div>
                 <NavbarLink href='signup' title='Sign Up'/>

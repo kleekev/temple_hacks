@@ -5,7 +5,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     return (
-        <form className='form-styles'>
+        <div className='flex items-center justify-center w-full h-full'>
+            <form className='form-styles'>
             <h1 className='text-2xl font-bold'>
                 Login
             </h1>
@@ -23,9 +24,9 @@ const Login = () => {
                     value={password}
                 />
             </div>
-            
             <button className='btn-login-styles'>Login</button>
-        </form>
+            </form>
+        </div>
     )
 }
 export default Login
